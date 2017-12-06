@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+
+<body>
+
+  <style>
+    .calculator {
+      font-size: 50px;
+      color: red;
+    }
+
+    .color_input {
+      color: purple;
+      font-weight: bold;
+    }
+
+    .green {
+      color: green;
+    }
+  </style>
+
+  <p class="calculator">До нового
+    <span id="year" class="green"></span> года осталось
+    <span id="month" class="green"></span> месяцев
+    <span id="day"class="green"></span> дней
+    <span id="hours"class="green"></span> часов
+    <span id="minute"class="green"></span> минут
+    <span id="second"class="green"></span> секнуд
+  </p>
+
+  <script>
+    var today = new Date;
+    var thisyear = today.getFullYear();
+    var nextyear = thisyear + 1;
+
+    //проверка високосного года 
+    var leapyear = false;
+    if (thisyear % 4 == 0 && thisyear % 100 != 0 || thisyear % 400 == 0) {
+      leapyear = true;
+    }
+    //количество дней в месяце
+
+    months_list = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    if (leapyear == true) {
+      months_list[1] = 29;
+    };
+
+
+    var monthleft = 12 - today.getMonth();
+    var daysleft = months_list[(today.getMonth() - 1)] - today.getUTCDate()
+    var hoursleft = 24 - today.getHours();
+    var minutesleft = 60 - today.getMinutes();
+    var secondsleft = 60 - today.getSeconds();
+
+
+
+    //вставляем в документ
+    var el_year = document.getElementById("year");
+    el_year.innerHTML = nextyear;
+
+    var el_month = document.getElementById("month");
+    el_month.innerHTML = monthleft;
+
+    var el_day = document.getElementById("day");
+    el_day.innerHTML = daysleft;
+
+    var el_hour = document.getElementById("hours");
+    el_hour.innerHTML = hoursleft;
+
+    var el_minute = document.getElementById("minute");
+    el_minute.innerHTML = minutesleft;
+
+    var el_second = document.getElementById("second");
+    el_second.innerHTML = secondsleft;
+
+
+    console.log("до нового " + nextyear + " года осталось: " +
+      monthleft + " месяцев " + daysleft + " дней " + hoursleft +
+      " часов " + minutesleft + " минут " + secondsleft + "секнуд");
+  </script>
+</body>
+
+</html>
